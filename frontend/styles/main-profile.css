@@ -1,0 +1,52 @@
+/* main profile related styles */
+
+#main-profile-modal {
+    /* display: flex; */
+    display: none;
+    z-index: 999;
+    background-color: rgb(255, 250, 250);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* color: rgb(255,30,120); */
+}
+
+#main-profile-button {
+    display: none;
+    width: min(30px, 5vw);
+    height: min(30px, 5vw);
+    padding: 0px;
+    margin: 0px;
+    align-self: center;
+    background-color: transparent;
+}
+
+/* .main-profile-input {
+    margin: 10px;
+} */
+
+
+
+#main-profile-image {
+    max-width: min(100px, 25vw);
+    min-width: min(50px, 15vw);
+}
+
+#edit-profile-button {
+    background-color: rgb(255,30,120);
+}
+
+#close-profile-button {
+    background-color: rgb(255, 160, 72);
+}
+
+#profile-success-message {
+    display: none;
+}
+
+#profile-error-message {
+    display: none;
+}
+
+@media all and (max-width: 600px) {
+}

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slackr</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- You can add your styles and scripts here -->
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/main-styles.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/login.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/channels.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/messages.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/profile-popup.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/main-profile.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/image-gallery.css" />
+  <script type="module" src="src/helpers.js"></script>
+</head>
+
+<body>
+  <!-- This is an example app structure, you can modify this as much as you choose -->
+  <header class="banner">
+    <div class="header-logo">
+      <img class="logo-small" src="assets/logo.svg" alt="Slackr logo">
+      <h2>Slackr</h2>
+    </div>
+    <h1 id="channel-page-title">HOME</h1>
+    <span class="horizontal-flex">
+      <button id="main-profile-button" class="affordance-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" fill="#ad005c"/>
+          <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z" fill="#e94576"/>
+        </svg>
+      </button>
+      <div>
+        <button id="index-logout-button">
+          <h4>LOGOUT</h4>
+        </button>
+      </div>
+    </span>
+  </header>
+  <main role="main">
+    <!-- app goes here -->
+    <div id="login-window-container">
+      <div id="index-error-modal" class = "error-popup">
+        <div id='error-modal-message'>Error:</div>
+        <button id="index-button-close-error" class="button-close-error affordance-button">OK</button>
+      </div>
+      <div>
+        <img class="logo-big" src="assets/logo.svg" alt="Slackr logo">
+      </div>
+      <div id="login-container">
+        <div class= "login-field" id="register-field-name">
+          <label>
+            <div>NAME</div>
+            <input type="text" id="input-register-name" class="login-input"/>
+          </label>
+        </div>
+        <div class= "login-field">
+          <label>
+            <div>EMAIL</div>
+            <input type="email" id="input-login-email" class="login-input"/>
+          </label>
+        </div>
+        <div class= "login-field">
+          <label>
+            <div>PASSWORD</div>
+            <input type="password" id="input-login-password" class="login-input"/>
+          </label>
+        </div>
+        <div id="register-field-confirm-password" class= "login-field">
+          <label>
+            <div>confirm password</div>
+            <input type="password" id="input-confirm-password" class="login-input"/>
+          </label>
+        </div>
+        <button id="index-primary-button">
+          <h3 id="index-primary-button-text">LOGIN</h3>
+        </button>
+      </div>
+      <div class = "register-field">
+        <h4 id="index-secondary-text">Don't have an account?</h4>
+        <button class = "secondary-button" id="index-secondary-button">
+          <h4 id="index-secondary-button-text">Register!</h4>
+        </button>
+      </div>
+    </div>
+    <div id="app-container">
+      <div id="channels-banner">
+        <div id="channels-public-list" class="channels-scroll-list">
+          <button class = "channels-list-label channel-list-icon">
+            <h3>Public:  </h3>
+          </button>
+          <button title="Create a Public Channel" id="create-public-channel" class = "channel-list-icon">
+            <h3>+</h3>
+          </button>
+        </div>
+        <div id="channels-private-list" class="channels-scroll-list">
+          <button class="channels-list-label channel-list-icon">
+            <h3>Private:</h3>
+          </button>
+          <button title="Create a Private Channel" id="create-private-channel" class = "channel-list-icon">
+            <h3>+</h3>
+          </button>
+        </div>
+      </div>
+      <div id="channel-container">
+        <div id = "main-profile-modal" class="inner-overlay">
+          <h1>Your Profile</h1>
+          <img id="main-profile-image" src="assets/profile_icon.svg" alt="Your profile picture">
+          <div class="left-aligned-form-input">
+            <h4>Change Profile Picture</h4>
+            <label class="file-upload">
+              <div class="button-icon-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16">
+                  <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z" fill="#c72957"/>
+                </svg>
+              </div>
+              <div id=main-profile-image-input-name>
+                Upload Image
+              </div>
+              <input type="file" accept="image/*" id="input-main-profile-image" class="file-upload-input"/>
+            </label>
+          </div>
+          <div id="main-profile-image-input-message"></div>
+          <div class="left-aligned-form-input">
+            <label>
+              <h3>Name</h3>
+              <input type="text" id="input-main-profile-name" class="login-input"/>
+            </label>
+          </div>
+          <div class="left-aligned-form-input">
+            <label>
+              <h3>Email</h3>
+              <input type="text" id="input-main-profile-email" class="login-input"/>
+            </label>
+          </div>
+          <div class="left-aligned-form-input">
+            <label>
+              <h3>Bio</h3>
+              <input type="text" id="input-main-profile-bio" class="login-input"/>
+            </label>
+          </div>
+          <div class="left-aligned-form-input">
+              <h4>Password</h4>
+              <input type="password" id="input-main-profile-password">
+            <!-- </label> -->
+            <label class="horizontal-label">
+              <input type="checkbox" id="input-main-profile-show-password" value="showing">
+              <h4>Show Password?</h4>
+            </label> 
+          </div>
+          <h4 id="profile-success-message" class="success-message">Successfully updated your profile</h3>
+          <h4 id="profile-error-message" class="error-message"></h3>
+          <div class="horizontal-flex">
+            <button id = "edit-profile-button" class="affordance-button">CONFIRM EDIT</button>
+            <button id = "close-profile-button" class="affordance-button">CLOSE</button>
+          </div>
+        </div>
+        <div id = "create-channel-modal" class="inner-overlay">
+          <h1>Create a Channel</h1>
+          <h4 id="create-channel-error-message" class="error-message"></h3>
+          <div class="left-aligned-form-input">
+            <label>
+              <h3>Channel Name</h3>
+              <input type="text" id="input-create-channel-name" class="login-input"/>
+            </label>
+          </div>
+          <div class="left-aligned-form-input">
+            <label>
+              <h3>Description</h3>
+              <input type="text" id="input-create-channel-description" 
+              class="login-input" placeholder="(optional)"/>
+            </label>
+          </div>
+          <div class="horizontal-flex">
+            <label class="horizontal-flex">
+              <h4>Private</h4>
+              <input type="radio" id="input-channel-type-private"
+                     name="channel-type" value="Private">
+            </label>
+            <label class="horizontal-flex">
+              <h4>Public</h4>
+              <input type="radio" id="input-channel-type-public"
+                     name="channel-type" value="Public">
+            </label> 
+          </div>
+          <div class="horizontal-flex">
+            <button id = "confirm-create-channel-button" class="affordance-button">CREATE</button>
+            <button id = "cancel-create-channel-button" class="affordance-button">CANCEL</button>
+          </div>
+        </div>
+        <div id="join-channel-page" class="inner-overlay">
+          <h1 id="join-channel-message"></h1>
+          <div class="horizontal-flex">
+            <button id="join-channel-button" class="affordance-button">JOIN !</button>
+            <button id="cancel-join-channel-button" class="affordance-button">CANCEL</button>
+          </div>
+          <div id="join-channel-error-message" class="error-message"></div>
+        </div>
+        <div id="channel-page">
+          <div id="channel-menu-options">
+            <button title="Pinned Messages" id="pinned-messages-channel-button" class="button-icon-medium affordance-button">
+              <img class="channel-menu-option-img" src="assets/pin_icon.svg" alt="channel settings button">
+            </button>
+            <button title="channel settings" id="settings-channel-button" class="button-icon-medium affordance-button">
+              <img class="channel-menu-option-img" src="assets/gear_icon.svg" alt="channel settings button">
+            </button>
+            <div id="channel-info-open-close">
+              <button title="channel-information" id="info-channel-button" class="button-icon-medium affordance-button stacking-element">
+                <img class="channel-menu-option-img" src="assets/info_icon.svg" alt="channel information button">
+              </button>
+              <button id="channel-info-close-button" class="button-icon-medium affordance-button stacking-element" display="none">
+                <img class="channel-menu-option-img" src="assets/cross_icon.svg" alt="channel settings button">
+              </button>
+            </div>
+          </div>
+          <div id = "channel-invite-modal" class="inner-overlay">
+            <h1>Invite Users</h1>
+            <!-- <div class="left-aligned-form-input"> -->
+            <div id="invite-loading-text">
+              Loading Users List
+            </div>
+            <div id="invite-user-template" class="invite-user-box">
+              <img class="invite-user-icon" src="assets/profile_icon.svg"/>
+              <div class="invite-user-name">name</div>
+              <button class="invite-user-button affordance-button">
+                <img src="assets/invite_icon.svg">
+              </button>
+            </div>
+            <div id="invite-users-list">
+            </div>
+            <h4 id="invite-success-message" class="success-message"></h3>
+            <h4 id="invite-error-message" class="error-message"></h3>
+            <div class="horizontal-flex">
+              <button id = "cancel-invite-button" class="affordance-button">CLOSE</button>
+            </div>
+          </div>
+          <div id="channel-settings-modal" class="stacking-element">
+            <h2>Channel Settings</h2>
+            <div>
+              <div id="edit-channel-form" name="channel-settings">
+                <div id="edit-channel-fields" name="channel-settings">
+                  <label id="edit-channel-name-field" class="edit-channel-field">
+                    <h3>Edit Channel Name</h3>
+                    <input type="text" name="channel-settings-name" id="input-channel-settings-name">
+                  </label>
+                  <label id="edit-channel-description-field" class="edit-channel-field">
+                    <h3>Edit Channel Description</h3>
+                    <input type="text" name="channel-settings-description" id="input-channel-settings-description">
+                  </label>
+                </div>
+                <div id="edit-channel-buttons">
+                  <button id="button-confirm-edit-channel" class="affordance-button">
+                      EDIT
+                  </button>
+                  <button id="button-cancel-edit-channel" class="affordance-button">
+                      CANCEL
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div id="edit-channel-error-message" class="error-message"></div>
+            <span class="horizontal-flex">
+              <label id="leave-channel-label" class="horizontal-label">
+                <button title="Leave Channel" id="leave-channel-button" class="button-icon-medium affordance-button">
+                  <img class="channel-menu-option-img" src="assets/exit_icon.svg" alt="leave channel button">
+                </button>
+                <div>
+                  LEAVE CHANNEL
+                </div>
+              </label>
+              <label id="channel-invite-label" class="horizontal-label">
+                <button title="Invite Users" id="channel-invite-button" class="button-icon-medium affordance-button">
+                  <img class="channel-menu-option-img" src="assets/invite_icon.svg" alt="channel invite button">
+                </button>
+                <div>
+                  INVITE OTHERS
+                </div>
+              </label>
+            </span>
+          </div>
+          <div id="channel-details-modal" class="stacking-element">
+            <h2>Channel Details</h2>
+            <div class="horizontal-flex align-start-div">
+              <div class="even-size-div">
+                <h4>channel name</h4>
+                <div id="channel-details-name" class="channel-detail"></div>
+                <h4>description</h4>
+                <div id="channel-details-description" class="channel-detail"> </div>
+              </div>
+              <div class="even-size-div">
+                <h4>creator</h4>
+                <div id="channel-details-creator" class="channel-detail"> </div>
+                <h4>privacy</h4>
+                <div id="channel-details-privacy" class="channel-detail"> </div>
+                <h4>created on</h4>
+                <div id="channel-details-created" class="channel-detail"></div>
+              </div>
+            </div>
+          </div>
+          <div id="channel-pinned-messages-modal" class="stacking-element">
+            <h2>Pinned Messages</h2>
+            <div id="pinned-messages"></div>
+          </div>
+          <div id="image-gallery-modal" class="inner-overlay">
+            <button title="Close Image Gallery" id="button-close-image-gallery" class="affordance-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" fill="eee"/>
+              </svg>
+            </button>
+            <div id="image-gallery-content">
+              <button title="Previous Image" id="prev-image-button" class="affordance-button image-gallery-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-caret-left-square" viewBox="0 0 16 16">
+                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" fill="#eee"/>
+                  <path d="M10.205 12.456A.5.5 0 0 0 10.5 12V4a.5.5 0 0 0-.832-.374l-4.5 4a.5.5 0 0 0 0 .748l4.5 4a.5.5 0 0 0 .537.082z" fill="#eee"/>
+                </svg>
+                Prev
+              </button>
+              <img id="displayed-gallery-image" src="assets/logo.svg">
+              <button title="Next Image" id="next-image-button" class="affordance-button image-gallery-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-caret-right-square" viewBox="0 0 16 16">
+                  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" fill="#eee"/>
+                  <path d="M5.795 12.456A.5.5 0 0 1 5.5 12V4a.5.5 0 0 1 .832-.374l4.5 4a.5.5 0 0 1 0 .748l-4.5 4a.5.5 0 0 1-.537.082z" fill="#eee"/>
+                </svg>
+                Next
+              </button>
+            </div>
+
+          </div>
+          <div id=profile-modal-template class="profile-modal">
+            <img class="profile-modal-icon" src="assets/profile_icon.svg"/>
+            <div class="profile-modal-name"></div>
+            <div class="profile-modal-email"></div>
+            <div class="profile-modal-bio"></div>
+            <button class="profile-modal-close-button affordance-button msg-option-button">
+              <img src="assets/cross_icon.svg">
+            </button>
+          </div>
+          <div id="channel-messages">
+            <span id="message-loading-block">
+              <!-- Loading... -->
+            </span>
+            <span id="channel-message-template" class="message-box">
+              <img class="message-sender-icon profile-link-button" src="assets/profile_icon.svg" alt="sender"/>
+              <div class="message-sender-name profile-link-button">name</div>
+              <div class="message-date">date</div>
+              <span class="message-options">
+                <!-- options -->
+                <span>
+                  <button title="Edit message" class="button-edit-msg msg-option-button affordance-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square"  viewBox="0 0 16 16">
+                      <path fill="#ad005c" d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill="#8a2b08" fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                  </button>
+                  <button title="Cancel edit" class="button-cancel-edit-msg msg-option-button affordance-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                      <path fill="#991d53" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
+                  </button>
+                </span>
+                <button title="Pin message" class="button-pin-msg msg-option-button affordance-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
+                    <path fill="#ad005c" d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+                  </svg>
+                </button>
+                <button title="Delete message" class="button-delete-msg msg-option-button affordance-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path fill="#993939" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                  </svg>
+                </button>
+              </span>
+              <div class="message-content"></div>
+              <div class="message-edited"></div>
+              <div class="message-edit-date"></div>
+              <div class="message-reacts-options-container">
+                <button title="add a react" class="react-button affordance-button button-add-react">
+                  <h3>
+                    &#128049;
+                  </h3>
+                </button>
+                <span class="react-options">
+                  <button title="happy-cat-react" class="react-button react-1 affordance-button">&#128568;</button>
+                  <button title="laughing-cat-react" class="react-button react-2 affordance-button">&#128569;</button>
+                  <button title="sad-cat-react" class="react-button react-3 affordance-button">&#128575;</button>
+                </span>
+              </div>
+              <span class="message-reacts">
+              </span>
+            </span>
+          </div>
+          <div id="messaging-form-container">
+            <form id="messaging-form">
+              <label title="Upload Image" class="file-upload">
+                <div class="button-icon-medium">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-image" viewbox="0 0 16 16">
+                    <path d="m6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" fill="#c72957"/>
+                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" fill="#c72957"/>
+                  </svg>
+                </div>
+                <div id="messaging-form-img-name"></div>
+                <input type="file" accept="image/*" id="input-message-image" class="file-upload-input"/>
+              </label>
+              <input type="text" id="send-msg-input" placeholder="Write a message!">
+              <label title="Send Message" class="affordance-button submit-msg-container">
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="button-icon-medium">
+                  <path d="M7.75778 6.14799C6.84443 5.77187 6.0833 5.45843 5.49196 5.30702C4.91915 5.16036 4.18085 5.07761 3.63766 5.62862C3.09447 6.17962 3.18776 6.91666 3.34259 7.48732C3.50242 8.07644 3.8267 8.83302 4.21583 9.7409L4.86259 11.25H10C10.4142 11.25 10.75 11.5858 10.75 12C10.75 12.4142 10.4142 12.75 10 12.75H4.8626L4.21583 14.2591C3.8267 15.167 3.50242 15.9236 3.34259 16.5127C3.18776 17.0833 3.09447 17.8204 3.63766 18.3714C4.18085 18.9224 4.91915 18.8396 5.49196 18.693C6.0833 18.5416 6.84443 18.2281 7.75777 17.852L19.1997 13.1406C19.4053 13.0561 19.6279 12.9645 19.7941 12.867C19.944 12.779 20.3434 12.5192 20.3434 12C20.3434 11.4808 19.944 11.221 19.7941 11.133C19.6279 11.0355 19.4053 10.9439 19.1997 10.8594L7.75778 6.14799Z" fill="#b12175"/>
+                  </svg>
+                <input type="submit" id="send-msg-button">
+              </label>
+            </form>
+          </div>
+        </div>
+        <div id="empty-channel">
+          <h1>Welcome to Slackr</h1>
+          <h3>click on a channel to get started!</h3>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <!-- <p>&copy; Slackr</p> -->
+  </footer>
+  <script type="module" src="src/main.js"></script>
+  <script type="module" src="src/login.js"></script>
+  <script type="module" src="src/channel.js"></script>
+  <script type="module" src="src/message.js"></script>
+  <script type="module" src="src/profile.js"></script>
+  <script type="module" src="src/image-gallery.js"></script>
+</body>
+
+</html>

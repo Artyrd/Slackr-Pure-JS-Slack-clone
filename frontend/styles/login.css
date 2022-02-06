@@ -1,0 +1,125 @@
+/* login screen styles*/
+#login-window-container {
+    display: flex;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 5px solid rgb(255, 30, 124);
+    width: min(500px, 70vw);
+    /* height: minmax(300px, 600px); */
+    height: min(625px, 140vw);
+}
+
+#login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 10px;
+    /* width: 50%; */
+    /* width: min-content; */
+    width: min(250px, 35vw);
+    /* width:min-content; */
+}
+
+#login-container * {
+    width: 100%;
+}
+.login-field {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0px;
+    /* width: 100%; */
+}
+.login-input {
+    box-sizing: border-box;
+    height: 18pt;
+}
+#index-primary-button {
+    /* width: auto; fill the login field */
+    /* height:30px; */
+    height: min-content;
+    background-color: rgb(255,30,120);
+    border: 0 none #000000;
+    color: #ffffff;
+    margin: 5px 0px;
+    font-weight: bold;
+}
+#index-primary-button:hover {
+    background-color: rgb(200, 30, 100);
+    cursor: pointer;
+}
+#index-primary-button:active {
+    background-color: rgb(170, 30, 80);
+}
+.register-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.secondary-button {
+    height: min-content;
+    /* height: 20px; */
+    background-color: rgb(255, 30, 160);
+    border: 0 none #000000;
+    color: #ffffff;
+    /* margin: 5px 0px; */
+}
+.secondary-button:hover {
+    background-color: rgb(220, 30, 130);
+    cursor: pointer;
+}
+.secondary-button:active {
+    background-color: rgb(170, 30, 110);
+}
+
+.error-popup {
+    visibility: hidden;
+    width: inherit;
+    height: inherit;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.90);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+#error-modal-message {
+    font-size: 18pt;
+    text-align: center;
+}
+.button-close-error {
+    width: 60px;
+    height: 35px;
+    margin: 20px;
+    background-color: rgb(210, 30, 40);
+    font-weight: bold;
+}
+
+#index-logout-button {
+    /* height:30px; */
+    height: min-content;
+    background-color: rgb(255,30,120);
+    border: 0 none #000000;
+    color: #ffffff;
+    padding: min(1vw, 4px);
+    margin: 6px;
+    font-weight: bold;
+}
+#index-logout-button:hover {
+    background-color: rgb(200, 30, 100);
+    cursor: pointer;
+}
+#index-logout-button:active {
+    background-color: rgb(170, 30, 80);
+}
+
+
+
+#register-field-name, #register-field-confirm-password, #index-logout-button{
+    display: none;
+}

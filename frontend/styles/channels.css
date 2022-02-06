@@ -1,0 +1,378 @@
+
+/* channels related styles*/
+#app-container {
+    /* background-color: rgb(184, 255, 255); */
+    overflow: hidden;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    width: 100%;
+    height: inherit;
+    /* height: 100%; */
+    justify-content: flex-start;
+    align-content: center;
+}
+
+#channels-banner {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #ffffff; */
+    height:min-content;
+    width: 100%;
+}
+.channels-scroll-list {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(200, 30, 100);
+    overflow: auto;
+    white-space: nowrap;
+    height: min-content;
+}
+
+.channel-list-icon {
+    display: inline-block;
+    color: #ffffff;
+    border: 0 none #000000;
+    background-color: rgb(255,30,120);
+    font-size: 14pt;
+    /* height:min-content; */
+    width: max-content;
+    padding: min(2vw, 6px);
+    margin: 2px;
+}
+.channel-list-icon:hover {
+    background-color: rgb(200, 30, 100);
+    cursor: pointer;
+}
+.channel-list-icon:active {
+    background-color: rgb(170, 30, 80);
+}
+
+.channel-list-icon h3 {
+    margin: 0px;
+}
+
+#channels-private-list {
+    background-color: rgb(200, 30, 80);
+}
+
+#channels-public-list {
+    background-color: rgb(200, 30, 110);
+}
+#channels-public-list .channel-list-icon {
+    background-color: rgb(218, 54, 136);
+}
+#channels-public-list .channel-list-icon:hover {
+    background-color: rgb(200, 30, 110);
+}
+#channels-public-list .channel-list-icon:active {
+    background-color: rgb(170, 30, 100);
+}
+
+.channels-list-label {
+    display: block;
+    pointer-events: none;
+    width: 70px;
+}
+
+#channel-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: rgb(255, 254, 253);
+    /* height: 100vh; */
+}
+
+#empty-channel {
+    /* make it at the back of everything */
+    z-index: 0;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:rgb(218, 54, 90);
+    padding-top: min(15vh, 15vw);
+    /* text-align: center; */
+}
+
+#channel-page-title {
+    display: none;
+    text-align: center;
+    align-self: center;
+    color: rgb(255, 30, 124)
+}
+
+#channel-page {
+    display: flex;
+    display: none;
+    overflow: hidden;
+    /* position: fixed; */
+    /* justify-content: center;  */
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    width: 100%;
+    /* height: 100%; */
+    z-index: 1;
+    background-color: #fffdf2;
+}
+
+#create-channel-modal {
+    display: flex;
+    display: none;
+    z-index: 10;
+    background-color: rgb(255, 250, 250);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: min(15vh,15vw);
+}
+
+#confirm-create-channel-button {
+    background-color: rgb(255,30,120);
+}
+
+#cancel-create-channel-button {
+    background-color: rgb(255, 160, 72);
+}
+
+#join-channel-page {
+    display: flex;
+    display: none;
+    background-color: rgb(255, 250, 250);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: min(15vh, 15vw);
+    align-items: center;
+    z-index: 5;
+}
+
+#join-channel-button {
+    background-color: rgb(240, 50, 110);
+}
+
+#cancel-join-channel-button {
+    background-color: rgb(240, 140, 60);
+}
+
+#channel-details-modal {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    background-color: rgb(255, 250, 245);
+    color: rgb(210, 25, 100);
+    z-index: 5;
+    border-bottom: 2px solid #ca7fc0;
+}
+
+#channel-details-modal h4 {
+    margin-top: min(10px, 2vw);
+}
+
+#channel-details-modal > * {
+    margin-left: min(10px, 2vw);
+}
+.channel-detail {
+    margin: 4px 0px;
+    margin-bottom: 2pt;
+}
+
+#channel-settings-modal {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    background-color: rgb(255, 250, 245);
+    color: rgb(210, 25, 100);
+    border-bottom: 2px solid #ca7fc0;
+    z-index: 5;
+}
+#channel-settings-modal h2 {
+    margin-left: min(10px, 2vw);
+}
+
+#channel-pinned-messages-modal {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    width: 100vw;
+    background-color: rgb(255, 250, 245);
+    color: rgb(210, 25, 100);
+    z-index: 4;
+    overflow: hidden;
+    max-height: 30%;
+    padding: 10px;
+    border-bottom: 2px solid #ca7fc0;
+}
+#channel-pinned-messages-modal h2 {
+    margin-left: min(10px, 2vw);
+}
+
+#pinned-messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+#channel-menu-options {
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 25px;
+}
+
+.channel-menu-option-img {
+    width: min(20px, 5vw);
+    height: min(20px, 5vw);
+}
+
+.button-icon-medium {
+    width: min(20px, 5vw);
+    height: min(20px, 5vw);
+    padding: 0px;
+    margin: 5px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-icon-medium:hover {
+    cursor: pointer;
+}
+
+#channel-info-open-close {
+    width: min(30px, 7vw);
+    display: block;
+}
+
+#edit-channel-fields {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.edit-channel-field {
+    margin: min(10px, 2vw)
+}
+
+#edit-channel-buttons {
+    /* margin: 10px; */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+#edit-channel-buttons > button {
+    font-size: min(12pt, 3vw);
+}
+
+#button-confirm-edit-channel {
+    background-color: rgb(240, 50, 110);
+}
+
+#button-cancel-edit-channel {
+    background-color: rgb(240, 140, 60);
+}
+
+#leave-channel-label {
+    margin-top: min(10px, 5vw);
+    /* margin-left: min(10px, 2vw); */
+}
+
+#channel-invite-modal {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    /* z-index: 999; */
+    z-index: 99;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 250, 253);
+    /* color:rgb(104, 10, 57); */
+    border: 5px solid rgb(255, 30, 124);
+    width: min(500px, 70vw);
+    /* height: minmax(300px, 600px); */
+    height: min(600px, 70vh, 100vw);
+    margin: 10px;
+}
+
+#invite-users-list {
+    width: 80%;
+    max-height: 70%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#confirm-invite-button {
+    background-color: rgb(255, 30, 124);
+}
+
+#cancel-invite-button {
+    background-color: rgb(212, 135, 47);
+}
+
+
+.invite-user-icon {
+    grid-area: invite-icon;
+    width: min(30px, 2.5vw);
+    margin: 2px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.invite-user-name {
+    grid-area: invite-name;
+    display: flex;
+    align-items: center;
+}
+
+.invite-user-button {
+    padding: 1px;
+    margin: 0px;
+    margin-right: 10px;
+    width: min(30px, 5vw);
+    height: min(25px, 4vw);
+    grid-area: invite-button;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+.invite-user-button > img {
+    height: 100%;
+    margin: 1px;
+}
+
+.invite-user-box {
+    display: grid;
+    width: 100%;
+    grid-template-areas: "invite-icon invite-name . invite-button";
+    grid-template-columns: min-content min-content auto min-content;
+    grid-template-rows: auto;
+    margin: 2px;
+    padding: 2px;
+    /* background-color: #fcf7de; */
+    background-color: #ffffff;
+}
+
+#invite-user-template {
+    display: none;
+}
+
+@media all and (max-width: 600px) {
+    .channels-list-label {
+        display: none;
+    }
+}
